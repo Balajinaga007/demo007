@@ -14,7 +14,7 @@
           min-height: 100vh;
       }
       
-      .wrapper {
+      .side {
           display: flex;
           width: 100%;
           align-items: stretch;
