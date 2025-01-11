@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mazer Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.41.0/dist/apexcharts.css">
+    <link rel="stylesheet" href="style.css">
+    <style>.card {
+          height: 100%;
+      }
+      
+      .profile-visit, .latest-comments {
+          min-height: 400px; /* Set to the desired height */
+      }</style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="active">
+            <div class="sidebar-header">
+                <h3>Mazer</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li class="menu-header">Menu</li>
+                <li class="active">
+                    <a href="#"><i class="bi bi-grid-fill"></i> Dashboard</a>
+                </li>
+                <li class="menu-header">Components</li>
+                <li>
+                    <a href="#"><i class="bi bi-box"></i> Components</a>
+                </li>
+                <li>
+                    <a href="#"><i class="bi bi-box-seam"></i> Extra Components</a>
+                </li>
+                <li>
+                    <a href="#"><i class="bi bi-grid-1x2-fill"></i> Layouts</a>
+                </li>
+                <li class="menu-header">Forms & Tables</li>
+                <li>
+                    <a href="#"><i class="bi bi-file-earmark-text"></i> Form Elements</a>
+                </li>
+                <li>
+                    <a href="#"><i class="bi bi-people"></i> Form Layout</a>
+                </li>
+                <li class="menu-header">Extra UI</li>
+                <li>
+                    <a href="#"><i class="bi bi-gear"></i> Widgets</a>
+                </li>
+                <li>
+                    <a href="#"><i class="bi bi-bar-chart"></i> Charts</a>
+                </li>
+                <li>
+                    <a href="#"><i class="bi bi-map"></i> Maps</a>
+                </li>
+                <li>
+                    <a href="#"><i class="bi bi-upload"></i> File Uploader</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div class="d-flex align-items-center">
+                        <div class="theme-toggle mx-3">
+                            <i class="bi bi-sun-fill"></i>
+                        </div>
+                        <div class="profile-img">
+                            <img src="https://sjc.microlink.io/RCKCrpHNPCHT-rZA_vkid93MxdleDjwoq7CkYcy2xLEV45JfZwnBaedFeA_WFKV1sSlUmaPTxHdkbjL1KGQGeA.jpeg" alt="Profile" class="rounded-circle" width="32" height="32">
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid">
+                <h1 class="mb-4">Profile Statistics</h1>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="stats-icon purple">
+                                    <i class="bi bi-eye-fill"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0 text-muted">Profile Views</h6>
+                                    <h3 class="mb-0">112,000</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="stats-icon blue">
+                                    <i class="bi bi-people-fill"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0 text-muted">Followers</h6>
+                                    <h3 class="mb-0">183,000</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="stats-icon green">
+                                    <i class="bi bi-person-fill"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0 text-muted">Following</h6>
+                                    <h3 class="mb-0">80,000</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="stats-icon red">
+                                    <i class="bi bi-bookmark-fill"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0 text-muted">Saved Post</h6>
+                                    <h3 class="mb-0">112</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-12 col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Profile Visit</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="profileVisitChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Latest Comments</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="comment-list">
+                                    <div class="comment-item d-flex mb-3">
+                                        <div class="avatar">
+                                            <img src="images\11.jpg" alt="Avatar" class="rounded-circle" width="40" height="40">
+                                        </div>
+                                        <div class="ms-3">
+                                            <h6 class="mb-1">Priya</h6>
+                                            <p class="mb-0 text-muted">Congratulations on your graduation!</p>
+                                        </div>
+                                    </div>
+                                    <div class="comment-item d-flex mb-3">
+                                        <div class="avatar">
+                                            <img src="images\22.jpg" alt="Avatar" class="rounded-circle" width="40" height="40">
+                                        </div>
+                                        <div class="ms-3">
+                                            <h6 class="mb-1">Sandeep</h6>
+                                            <p class="mb-0 text-muted">Wow amazing design!</p>
+                                        </div>
+                                    </div>
+                                    <div class="comment-item d-flex">
+                                        <div class="avatar">
+                                            <img src="images\44.jpg" alt="Avatar" class="rounded-circle" width="40" height="40">
+                                        </div>
+                                        <div class="ms-3">
+                                            <h6 class="mb-1">swapna</h6>
+                                            <p class="mb-0 text-muted">What a stunning design! You are so talented and creative!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-12 col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Profile Visit</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="profile-visit-list">
+                                    <div class="visit-item">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <span class="dot dot-primary"></span>
+                                                <span class="ms-2">Europe</span>
+                                            </div>
+                                            <span class="fw-bold">862</span>
+                                        </div>
+                                        <div id="sparkline1" class="sparkline-chart"></div>
+                                    </div>
+                                    <div class="visit-item">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <span class="dot dot-info"></span>
+                                                <span class="ms-2">America</span>
+                                            </div>
+                                            <span class="fw-bold">375</span>
+                                        </div>
+                                        <div id="sparkline2" class="sparkline-chart"></div>
+                                    </div>
+                                    <div class="visit-item">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <span class="dot dot-warning"></span>
+                                                <span class="ms-2">India</span>
+                                            </div>
+                                            <span class="fw-bold">625</span>
+                                        </div>
+                                        <div id="sparkline3" class="sparkline-chart"></div>
+                                    </div>
+                                    <div class="visit-item">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <span class="dot dot-danger"></span>
+                                                <span class="ms-2">Indonesia</span>
+                                            </div>
+                                            <span class="fw-bold">1025</span>
+                                        </div>
+                                        <div id="sparkline4" class="sparkline-chart"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Visitors Profile</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="visitorsChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="script.js"></script>
+</body>
+</html>
