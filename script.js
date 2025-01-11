@@ -1,238 +1,211 @@
-:root {
-          --sidebar-width: 250px;
-          --sidebar-width-collapsed: 80px;
-          --primary-color: #435ebe;
-          --purple: #9694ff;
-          --blue: #57caeb;
-          --green: #5ddab4;
-          --red: #ff7976;
-      }
+document.addEventListener('DOMContentLoaded', function() {
+          const sidebar = document.getElementById('sidebar');
+          const content = document.getElementById('content');
+          const sidebarCollapse = document.getElementById('sidebarCollapse');
+          const overlay = document.querySelector('.sidebar-overlay');
       
-      body {
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-          background-color: #f2f7ff;
-          min-height: 100vh;
-      }
-      
-      .wrapper {
-          display: flex;
-          width: 100%;
-          align-items: stretch;
-      }
-      
-      #sidebar {
-          min-width: var(--sidebar-width);
-          max-width: var(--sidebar-width);
-          background: #ffffff;
-          transition: all 0.3s ease-in-out;
-          position: fixed;
-          top: 0;
-          left: 0;
-          height: 100vh;
-          z-index: 999;
-          box-shadow: 0 0 15px rgba(0,0,0,0.05);
-          overflow-x: hidden;
-          overflow-y: auto;
-      }
-      
-      #sidebar.active {
-          min-width: var(--sidebar-width);
-      }
-      
-      .sidebar-header {
-          padding: 1.5rem;
-          border-bottom: 1px solid #f0f0f0;
-      }
-      
-      .sidebar-header h3 {
-          margin: 0;
-          color: var(--primary-color);
-          font-weight: 700;
-      }
-      
-      .menu-header {
-          padding: 1rem 1.5rem;
-          font-size: 0.8rem;
-          color: #888;
-          text-transform: uppercase;
-          font-weight: 600;
-      }
-      
-      #sidebar ul li a {
-          padding: 0.8rem 1.5rem;
-          display: block;
-          color: #666;
-          text-decoration: none;
-          transition: all 0.3s;
-          white-space: nowrap;
-      }
-      
-      #sidebar ul li a i {
-          margin-right: 10px;
-      }
-      
-      #sidebar ul li.active a,
-      #sidebar ul li a:hover {
-          background: var(--primary-color);
-          color: #fff;
-      }
-      
-      #content {
-          width: 100%;
-          min-height: 100vh;
-          transition: all 0.3s;
-          margin-left: var(--sidebar-width);
-      }
-      
-      #content.active {
-          margin-left: var(--sidebar-width);
-      }
-      
-      .navbar {
-          padding: 1rem;
-          background: #fff !important;
-          box-shadow: 0 0 15px rgba(0,0,0,0.05);
-      }
-      
-      #sidebarCollapse {
-          cursor: pointer;
-          z-index: 1000;
-          transition: all 0.3s ease-in-out;
-      }
-      
-      #sidebarCollapse:hover {
-          background: #f8f9fa;
-      }
-      
-      .stats-icon {
-          width: 48px;
-          height: 48px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 0.5rem;
-          color: #fff;
-      }
-      
-      .stats-icon.purple { background: var(--purple); }
-      .stats-icon.blue { background: var(--blue); }
-      .stats-icon.green { background: var(--green); }
-      .stats-icon.red { background: var(--red); }
-      
-      .card {
-          border: none;
-          box-shadow: 0 0 15px rgba(0,0,0,0.05);
-          border-radius: 0.5rem;
-          height: 100%;
-      }
-      
-      .card-header {
-          background: none;
-          padding: 1.5rem;
-          border-bottom: 1px solid #f0f0f0;
-      }
-      
-      .card-header h4 {
-          margin: 0;
-          font-size: 1.2rem;
-          font-weight: 600;
-      }
-      
-      .comment-item {
-          padding: 0.5rem 0;
-      }
-      
-      .comment-item h6 {
-          font-size: 0.9rem;
-          font-weight: 600;
-      }
-      
-      .comment-item p {
-          font-size: 0.85rem;
-      }
-      
-      .visit-item {
-          padding: 1.5rem 0;
-          border-bottom: 1px solid rgba(0,0,0,0.05);
-      }
-      
-      .visit-item:last-child {
-          border-bottom: none;
-          padding-bottom: 0;
-      }
-      
-      .dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          display: inline-block;
-      }
-      
-      .dot-primary { background-color: var(--primary-color); }
-      .dot-info { background-color: var(--blue); }
-      .dot-warning { background-color: #ffc107; }
-      .dot-danger { background-color: var(--red); }
-      
-      .sparkline-chart {
-          height: 30px;
-          width: 100%;
-          margin-top: 0.5rem;
-      }
-      
-      .chart-container {
-          position: relative;
-          height: 300px;
-          width: 100%;
-      }
-      
-      @media (max-width: 768px) {
-          .chart-container {
-              height: 250px;
-          }
-      }
-      
-      @media (max-width: 991.98px) {
-          #sidebar {
-              margin-left: calc(var(--sidebar-width) * -1);
-              min-width: var(--sidebar-width);
-          }
-          
-          #sidebar.active {
-              margin-left: 0;
-          }
-          
-          #content {
-              margin-left: 0;
-          }
-          
-          #content.active {
-              margin-left: 0;
+          function toggleSidebar() {
+              sidebar.classList.toggle('active');
+              content.classList.toggle('active');
+              document.body.classList.toggle('sidebar-active');
+              overlay.classList.toggle('active');
           }
       
-          body.sidebar-active {
-              overflow: hidden;
+          sidebarCollapse.addEventListener('click', toggleSidebar);
+          overlay.addEventListener('click', toggleSidebar);
+      
+          // Profile Visit Chart
+          const profileCtx = document.getElementById('profileVisitChart').getContext('2d');
+          const profileVisitChart = new Chart(profileCtx, {
+              type: 'bar',
+              data: {
+                  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                  datasets: [{
+                      label: 'Profile Visits',
+                      data: [10, 20, 30, 20, 10, 20, 30, 20, 10, 20, 30, 20],
+                      borderColor: '#435ebe',
+                      backgroundColor: 'rgb(21, 96, 189)',
+                      tension: 0.4,
+                      fill: true
+                  }]
+              },
+              options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: {
+                      legend: {
+                          display: false
+                      },
+                      tooltip: {
+                          mode: 'index',
+                          intersect: false,
+                      }
+                  },
+                  scales: {
+                      y: {
+                          beginAtZero: true,
+                          grid: {
+                              display: true,
+                              color: '#f0f0f0'
+                          }
+                      },
+                      x: {
+                          grid: {
+                              display: false
+                          }
+                      }
+                  },
+                  onHover: (event, chartElement) => {
+                      event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+                  },
+                  hover: {
+                      mode: 'index',
+                      intersect: false
+                  }
+              }
+          });
+      
+          // Visitors Profile Chart
+          const visitorsCtx = document.getElementById('visitorsChart').getContext('2d');
+          const visitorsChart = new Chart(visitorsCtx, {
+              type: 'doughnut',
+              data: {
+                  labels: ['India','Europe'],
+                  datasets: [{
+                      data: [70, 30],
+                      backgroundColor: [
+                          '#435ebe',
+                          '#57caeb'
+                      ],
+                      borderWidth: 0
+                  }]
+              },
+              options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: {
+                      legend: {
+                          position: 'bottom',
+                          labels: {
+                              boxWidth: 12,
+                              padding: 20,
+                              font: {
+                                  size: 12
+                              }
+                          }
+                      },
+                      tooltip: {
+                          callbacks: {
+                              label: function(context) {
+                                  let label = context.label || '';
+                                  if (label) {
+                                      label += ': ';
+                                  }
+                                  if (context.parsed !== null) {
+                                      label += context.parsed + '%';
+                                  }
+                                  return label;
+                              }
+                          }
+                      }
+                  },
+                  cutout: '70%',
+                  layout: {
+                      padding: 20
+                  }
+              }
+          });
+      
+          function resizeCharts() {
+              profileVisitChart.resize();
+              visitorsChart.resize();
           }
       
-          .sidebar-overlay {
-              display: none;
-              position: fixed;
-              top: 0;
-              left: 0;
-              right: 0;
-              bottom: 0;
-              background-color: rgba(0, 0, 0, 0.5);
-              z-index: 998;
+          // Sparkline Charts
+          const sparklineOptions = {
+              chart: {
+                  type: 'line',
+                  height: 30,
+                  sparkline: {
+                      enabled: true
+                  },
+              },
+              stroke: {
+                  width: 2,
+                  curve: 'smooth'
+              },
+              fill: {
+                  type: 'gradient',
+                  gradient: {
+                      shadeIntensity: 0.9,
+                      thickness: 100,
+                      opacityFrom: 1,
+                      opacityTo: 1,
+                      stops: [0, 100]
+                  }
+              },
+              series: [{
+                  data: [25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54, 25, 66, 41, 89, 63]
+              }],
+              tooltip: {
+                  enabled: false
+              }
+          };
+      
+          new ApexCharts(document.querySelector("#sparkline1"), {
+              ...sparklineOptions,
+              colors: ['#435ebe']
+          }).render();
+      
+          new ApexCharts(document.querySelector("#sparkline2"), {
+              ...sparklineOptions,
+              colors: ['#57caeb']
+          }).render();
+      
+          new ApexCharts(document.querySelector("#sparkline3"), {
+              ...sparklineOptions,
+              colors: ['#ffc107']
+          }).render();
+      
+          new ApexCharts(document.querySelector("#sparkline4"), {
+              ...sparklineOptions,
+              colors: ['#ff7976']
+          }).render();
+      
+          // Handle Responsive Sidebar and Charts
+          function handleResize() {
+              if (window.innerWidth <= 991.98) {
+                  sidebar.classList.remove('active');
+                  content.classList.remove('active');
+                  document.body.classList.remove('sidebar-active');
+                  overlay.classList.remove('active');
+              } else {
+                  sidebar.classList.remove('active');
+                  content.classList.add('active');
+                  document.body.classList.remove('sidebar-active');
+                  overlay.classList.remove('active');
+              }
+              resizeCharts();
           }
       
-          .sidebar-overlay.active {
-              display: block;
-          }
-      }
+          window.addEventListener('resize', handleResize);
+          handleResize(); // Initial check
       
-      @media (max-width: 767.98px) {
-          .card {
-              margin-bottom: 1rem;
+          // Debounce function to limit the rate of chart resizing
+          function debounce(func, wait) {
+              let timeout;
+              return function executedFunction(...args) {
+                  const later = () => {
+                      clearTimeout(timeout);
+                      func(...args);
+                  };
+                  clearTimeout(timeout);
+                  timeout = setTimeout(later, wait);
+              };
           }
-      }
+      
+          // Debounced resize event listener
+          window.addEventListener('resize', debounce(resizeCharts, 250));
+      });
       
       
