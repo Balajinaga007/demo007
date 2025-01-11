@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
               }
           });
       
-          // Visitors Profile Chart
           const visitorsCtx = document.getElementById('visitorsChart').getContext('2d');
           const visitorsChart = new Chart(visitorsCtx, {
               type: 'doughnut',
@@ -121,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
               visitorsChart.resize();
           }
       
-          // Sparkline Charts
+          
           const sparklineOptions = {
               chart: {
                   type: 'line',
@@ -172,7 +171,6 @@ document.addEventListener('DOMContentLoaded', function() {
               colors: ['#ff7976']
           }).render();
       
-          // Handle Responsive Sidebar and Charts
           function handleResize() {
               if (window.innerWidth <= 991.98) {
                   sidebar.classList.remove('active');
@@ -189,9 +187,9 @@ document.addEventListener('DOMContentLoaded', function() {
           }
       
           window.addEventListener('resize', handleResize);
-          handleResize(); // Initial check
+          handleResize();
       
-          // Debounce function to limit the rate of chart resizing
+         
           function debounce(func, wait) {
               let timeout;
               return function executedFunction(...args) {
