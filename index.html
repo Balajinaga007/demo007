@@ -6,20 +6,12 @@
     <title>Mazer Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.41.0/dist/apexcharts.css">
-    <link rel="stylesheet" href="style.css">
-    <style>.card {
-          height: 100%;
-      }
-      
-      .profile-visit, .latest-comments {
-          min-height: 400px; /* Set to the desired height */
-      }</style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="wrapper">
         <!-- Sidebar -->
-        <nav id="sidebar" class="active">
+        <nav id="sidebar">
             <div class="sidebar-header">
                 <h3>Mazer</h3>
             </div>
@@ -71,9 +63,6 @@
                     <div class="d-flex align-items-center">
                         <div class="theme-toggle mx-3">
                             <i class="bi bi-sun-fill"></i>
-                        </div>
-                        <div class="profile-img">
-                            <img src="https://sjc.microlink.io/RCKCrpHNPCHT-rZA_vkid93MxdleDjwoq7CkYcy2xLEV45JfZwnBaedFeA_WFKV1sSlUmaPTxHdkbjL1KGQGeA.jpeg" alt="Profile" class="rounded-circle" width="32" height="32">
                         </div>
                     </div>
                 </div>
@@ -144,7 +133,9 @@
                                 <h4>Profile Visit</h4>
                             </div>
                             <div class="card-body">
-                                <canvas id="profileVisitChart"></canvas>
+                                <div class="chart-container">
+                                    <canvas id="profileVisitChart"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -157,7 +148,7 @@
                                 <div class="comment-list">
                                     <div class="comment-item d-flex mb-3">
                                         <div class="avatar">
-                                            <img src="images\11.jpg" alt="Avatar" class="rounded-circle" width="40" height="40">
+                                            <img src="/images/11.jpg" alt="Avatar" class="rounded-circle" width="40" height="40">
                                         </div>
                                         <div class="ms-3">
                                             <h6 class="mb-1">Priya</h6>
@@ -166,7 +157,7 @@
                                     </div>
                                     <div class="comment-item d-flex mb-3">
                                         <div class="avatar">
-                                            <img src="images\22.jpg" alt="Avatar" class="rounded-circle" width="40" height="40">
+                                            <img src="" alt="Avatar" class="rounded-circle" width="40" height="40">
                                         </div>
                                         <div class="ms-3">
                                             <h6 class="mb-1">Sandeep</h6>
@@ -175,7 +166,7 @@
                                     </div>
                                     <div class="comment-item d-flex">
                                         <div class="avatar">
-                                            <img src="images\44.jpg" alt="Avatar" class="rounded-circle" width="40" height="40">
+                                            <img src="/placeholder.svg?height=40&width=40" alt="Avatar" class="rounded-circle" width="40" height="40">
                                         </div>
                                         <div class="ms-3">
                                             <h6 class="mb-1">swapna</h6>
@@ -246,7 +237,9 @@
                                 <h4>Visitors Profile</h4>
                             </div>
                             <div class="card-body">
-                                <canvas id="visitorsChart"></canvas>
+                                <div class="chart-container">
+                                    <canvas id="visitorsChart"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -255,9 +248,12 @@
         </div>
     </div>
 
+    <div class="sidebar-overlay"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="script.js"></script>
 </body>
 </html>
+
